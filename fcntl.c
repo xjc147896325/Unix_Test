@@ -15,16 +15,16 @@
 
 
 
-int main (void)
+int main (int argc, char *argv[])
 {
 	int val;
 	
-	if(argv != 2)
+	if(argc != 2)
 	{
 		fprintf(stderr,"usage: fcntl <descriptor#>");
 	}
 	
-	if((val = fcntl(atoi(argv[1]), F_CETFL, 0)) < 0)
+	if((val = fcntl(atoi(argv[1]), F_GETFL, 0)) < 0)
 	{
 		fprintf(stderr,"fcntl error for fd %d", atoi(argv[1]));
 	/*offset = 15*/
@@ -78,10 +78,34 @@ int main (void)
 
 
 /*
-未测试 仅供提交使用
+root@jOKERII:/home/topeet/UNIX_test# cc fcntl.c -o fcntl
 */
 
 /* 
+
+root@jOKERII:/home/topeet/UNIX_test# ./fcntl
+usage: fcntl <descriptor#>Segmentation fault (core dumped)
+root@jOKERII:/home/topeet/UNIX_test# ./fcntl a
+read write
+root@jOKERII:/home/topeet/UNIX_test# ./fcntl err.c 
+read write
+root@jOKERII:/home/topeet/UNIX_test# ./fcntl 0 < /dev/tty
+read only
+root@jOKERII:/home/topeet/UNIX_test# ./fcntl 1 > temp.foo
+root@jOKERII:/home/topeet/UNIX_test# cat temp.foo
+write only
+root@jOKERII:/home/topeet/UNIX_test# ls
+a                          err.c     file_hole    lseek        stdin_out
+b                          exec_1    file.hole    lseek.c      stdin_out.c
+c                          exec_1.c  file_hole.c  myls         temp.foo
+copy_only_by_write_read    exec_2    get_pid      myls.c
+copy_only_by_write_read.c  exec_2.c  get_pid.c    out
+e                          fcntl     group        puts_gets
+err                        fcntl.c   group.c      puts_gets.c
+root@jOKERII:/home/topeet/UNIX_test# ./fcntl 2 2>>temp.foo 
+write only,append
+root@jOKERII:/home/topeet/UNIX_test# ./fcntl 5 5<>temp.foo 
+read write
 
 
 
