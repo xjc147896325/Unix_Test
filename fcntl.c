@@ -77,6 +77,24 @@ int main (int argc, char *argv[])
 }
 
 
+void set_f1(int fd, int flags) /*flags are file status flags to turn on */
+{
+	int 	val;
+	
+	if((val = fcntl(fd, F_GETFL, 0)) < 0)
+	{
+		fprintf(stderr,"fcntl F_GETFL err");
+	}
+	
+	val |= flags; /*turn on flags */
+	
+	if(fcntl(fd, F_SETFL, val) < 0)
+	{
+		fprintf(stderr,"fcntl F_SETFL err");
+	}
+}
+
+
 /*
 root@jOKERII:/home/topeet/UNIX_test# cc fcntl.c -o fcntl
 */
