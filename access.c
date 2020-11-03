@@ -21,13 +21,22 @@ int main (int argc, char *argv[])
 {
 	if(argc != 2)
 	{
-		fprintf(stderr, "usage: access <pathname>");
+		fprintf(stderr, "usage: access <pathname>\n");
 		exit(1);
 	}
 	
 	if(access(argv[1], R_OK) < 0)
 	{
-		fprintf(stderr, "access err for %s", argv[1]);
+		fprintf(stderr, "access err for %s\n", argv[1]);
+	}
+	else
+	{
+		fprintf(stdout, "read access OK\n");
+	}
+	
+	if(open(argv[1], O_RDONLY) < 0)
+	{
+		fprintf(stderr, "open err for %s\n", argv[1]);
 	}
 	else
 	{
@@ -98,7 +107,28 @@ open for reading OK
 
 待明天继续测试 2020-11-02 23：37
 
-
+发现了 弱智程序没写对
+我是弱智
+jOKERII@jOKERII:~/UNIX_test$ ls -l access
+-rwxr-xr-x 1 root root 8721 Nov  3 02:37 access
+jOKERII@jOKERII:~/UNIX_test$ ./access access
+read access OK
+open for reading OK
+jOKERII@jOKERII:~/UNIX_test$ ls -l /etc/shadow
+-rw-r----- 1 root shadow 1225 Nov  3 02:19 /etc/shadow
+jOKERII@jOKERII:~/UNIX_test$ ./access /etc/shadow
+access err for /etc/shadowopen err for /etc/shadow
+jOKERII@jOKERII:~/UNIX_test$ su
+Password: 
+root@jOKERII:/home/topeet/UNIX_test# chown root access
+root@jOKERII:/home/topeet/UNIX_test# chmod u+s access
+root@jOKERII:/home/topeet/UNIX_test# ls -l access
+-rwsr-xr-x 1 root root 8721 Nov  3 02:37 access
+root@jOKERII:/home/topeet/UNIX_test# exit
+exit
+jOKERII@jOKERII:~/UNIX_test$ ./access /etc/shadow
+access err for /etc/shadowopen for reading OK
+2020-11-03 18：45
 
 */
 
