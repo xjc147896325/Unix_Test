@@ -59,7 +59,7 @@ int main (void)
 			
 
 /*
-root@jOKERII:/home/topeet/UNIX_test# cc mycd.c -o mycdi'e'shi
+root@jOKERII:/home/topeet/UNIX_test# cc mycd.c -o mycd
 */
 
 /* 
@@ -71,7 +71,6 @@ chdir to /tmp succeeded
 root@jOKERII:/home/topeet/UNIX_test# pwd
 /home/topeet/UNIX_test
 
-写是写完了 也没有报错 也能正常运行 但是不是很理解为什么，不太懂其目的
 
 */
 
