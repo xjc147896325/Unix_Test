@@ -75,6 +75,7 @@ root@jOKERII:/home/topeet/UNIX_test# cc mycd-fix.c path_alloc.c -o mycd-fix
 root@jOKERII:/home/topeet/UNIX_test# ./mycd-fix
 cwd = /usr/include
 
+写是写完了 也没有报错 也能正常运行 但是不是很理解为什么，不太懂其目的
 
 */
 
