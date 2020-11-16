@@ -62,9 +62,9 @@ int main(void)
 		fprintf(stderr, "getchar err");
 	}
 	
-	pt_stdio("stdin", stdin);
-	pt_stdio("stdout", stdout);
-	pt_stdio("stderr", stderr);
+	pr_stdio("stdin", stdin);
+	pr_stdio("stdout", stdout);
+	pr_stdio("stderr", stderr);
 	
 	if((fp = fopen("/etc/passwd", "r")) == NULL)
 	{
