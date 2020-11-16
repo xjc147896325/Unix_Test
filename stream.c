@@ -61,6 +61,7 @@ int main(void)
 	{
 		fprintf(stderr, "getchar err");
 	}
+	fputs("one line to standard err.\n",stdout);
 	
 	pr_stdio("stdin", stdin);
 	pr_stdio("stdout", stdout);
