@@ -172,40 +172,26 @@ void pr_stdio(const char *name, FILE *fp)
 
 
 /*
-root@jOKERII:/home/topeet/UNIX_test# cc get_dev.c -o get_dev
+root@jOKERII:/home/topeet/UNIX_test# cc -o stream stream.c 
 */
 
 /* 
+root@jOKERII:/home/topeet/UNIX_test# ./stream
+enter any character
 
-root@jOKERII:/home/topeet/UNIX_test# ./get_dev / /home/topeet /dev/tty[01]
-/: dev = 8/1
-/home/topeet: dev = 8/1
-/dev/tty0: dev = 0/5 (character) rdev = 4/0
-/dev/tty1: dev = 0/5 (character) rdev = 4/1
-
-
-
-root@jOKERII:/home/topeet/UNIX_test# mount
-/dev/sda1 on / type ext4 (rw,errors=remount-ro)
-proc on /proc type proc (rw,noexec,nosuid,nodev)
-sysfs on /sys type sysfs (rw,noexec,nosuid,nodev)
-none on /sys/fs/fuse/connections type fusectl (rw)
-none on /sys/kernel/debug type debugfs (rw)
-none on /sys/kernel/security type securityfs (rw)
-udev on /dev type devtmpfs (rw,mode=0755)
-devpts on /dev/pts type devpts (rw,noexec,nosuid,gid=5,mode=0620)
-tmpfs on /run type tmpfs (rw,noexec,nosuid,size=10%,mode=0755)
-none on /run/lock type tmpfs (rw,noexec,nosuid,nodev,size=5242880)
-none on /run/shm type tmpfs (rw,nosuid,nodev)
-.host:/ on /mnt/hgfs type vmhgfs (rw,ttl=1)
-vmware-vmblock on /run/vmblock-fuse type fuse.vmware-vmblock (rw,nosuid,nodev,default_permissions,allow_other)
-gvfs-fuse-daemon on /home/topeet/.gvfs type fuse.gvfs-fuse-daemon (rw,nosuid,nodev,user=topeet)
-
-
-root@jOKERII:/home/topeet/UNIX_test# ls -l /dev/tty[01] /dev/sda[34]
-ls: cannot access /dev/sda[34]: No such file or directory
-crw--w---- 1 root tty 4, 0 Nov  6 01:16 /dev/tty0
-crw-rw---- 1 root tty 4, 1 Nov  6 01:16 /dev/tty1
+stram = stdin, line buffered, buffer size = 1024 
+stram = stdout, line buffered, buffer size = 1024 
+stram = stderr, unbuffered, buffer size = 0 
+stram = /etc/passwd, fully buffered, buffer size = 4096 
+root@jOKERII:/home/topeet/UNIX_test# ./stream < /etc/group >out 2>std.err
+root@jOKERII:/home/topeet/UNIX_test# cat std.err 
+root@jOKERII:/home/topeet/UNIX_test# cat out 
+enter any character
+stram = stdin, fully buffered, buffer size = 4096 
+stram = stdout, fully buffered, buffer size = 4096 
+stram = stderr, unbuffered, buffer size = 0 
+stram = /etc/passwd, fully buffered, buffer size = 4096 
+root@jOKERII:/home/topeet/UNIX_test# 
 
 */
 
