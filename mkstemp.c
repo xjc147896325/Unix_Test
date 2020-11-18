@@ -63,6 +63,7 @@ int main(void)
 	printf("trying to create second temp file...\n");
 	make_temp(bad_template);
 	
+	exit(0);
 }
 
 void make_temp(char *template)
