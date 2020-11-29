@@ -100,37 +100,13 @@ int main(void)
 }
 
 /*
-root@jOKERII:/home/topeet/UNIX_test# cc memory_stream.c -o memory_stream
+root@jOKERII:/home/topeet/UNIX_test# cc strftime.c -o strftime
 */
 
 /* 
-root@jOKERII:/home/topeet/UNIX_test# ./memory_stream
-inital buffer contents: 
-before flush: 
-after flush: hello, world
-len of string in buf = 12
-after flush: bbbbbbbbbbbbhello, world
-len of string in buf = 24
-after flush: hello, worldcccccccccccccccccccccccccccccccccc
-len of string in buf = 46
+root@jOKERII:/home/topeet/UNIX_test# ./strftime
+buffer length 16 is too smalltime and date: 06:19:33 PM, Sat Nov 28, 2020
 
 
 */
 
-/* 
-
-当注释掉fflush时：
-root@jOKERII:/home/topeet/UNIX_test# ./memory_stream
-inital buffer contents: 
-before flush: 
-after flush: 
-len of string in buf = 0
-after flush: hello, worldhello, world
-len of string in buf = 24
-after flush: hello, worldcccccccccccccccccccccccccccccccccc
-len of string in buf = 46
-
-
-
-（只有当移动或啥的处理fp时，才会把缓冲更新进流
- */
