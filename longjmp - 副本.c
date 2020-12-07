@@ -68,7 +68,7 @@ open write read unlink
 /* 
  * setjmp 
  */
-#include <setmp.h>
+#include <setimp.h>
  
 /* user own */
 #include "path_alloc.h"
@@ -78,26 +78,34 @@ open write read unlink
 #define MAXLINE 		20
 
 
-void 	do_line(char *);
-void 	cmd_add(void);
-void 	get_token(void);
+static void 	f1(int, int, int, int);
+static void 	f2(void);
 
 
-jmp_buf jmpbuffer;
+static jmp_buf 	jmpbuffer;
+static int		globval;
 
 
 int main(void)
 {
-	char 	line[MAXLINE];
+	int 			autoval;
+	register int	regival;
+	volatie	 int 	volaval;
+	static 	 int 	statval;
+	
+	globval = 1;
+	autoval = 2;
+	regival = 3;
+	volaval = 4;
+	statval = 5;
 	
 	if(setjmp(jmpbuffer) != 0)
 	{
-		printf("error");
+		printf("after longjmp:\n");
+		printf("globval = %d, autoval = %d, regival = %d, volaval = %d, statval = %d\n", globval, autoval, regival, volaval, statval);
+		
 	}
-	while(fgets(line, MAXLINE, stdin) != NULL)
-	{
-		do_line(line);
-	}
+	
 	
 	exit(0);
 }
@@ -141,7 +149,7 @@ int get_token(void)
 }
 
 /*
-仅为调试的框架使用
+未完成
 */
 
 

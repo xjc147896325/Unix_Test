@@ -68,14 +68,11 @@ open write read unlink
 /* 
  * setjmp 
  */
-#include <setimp.h>
+#include <setjmp.h>
  
 /* user own */
 #include "path_alloc.h"
 #include "getpwnam.h"
-
-#define TOK_ADD 		5
-#define MAXLINE 		20
 
 
 static void 	f1(int, int, int, int);
@@ -90,7 +87,7 @@ int main(void)
 {
 	int 			autoval;
 	register int	regival;
-	volatie	 int 	volaval;
+	volatile int 	volaval;
 	static 	 int 	statval;
 	
 	globval = 1;
@@ -103,53 +100,50 @@ int main(void)
 	{
 		printf("after longjmp:\n");
 		printf("globval = %d, autoval = %d, regival = %d, volaval = %d, statval = %d\n", globval, autoval, regival, volaval, statval);
-		
+		exit(0);
 	}
+	/* 
+	 * Change variables after setjmp, but before longjmp.
+	 */
+	globval = 95;
+	autoval = 96;
+	regival = 97;
+	volaval = 98;
+	statval = 99;
 	
-	
+	f1(autoval, regival, volaval, statval); /* never returns  */
 	exit(0);
 }
 
-char *tok_ptr;  			/* global pointer for get_token() */
-
-void do_line(char *ptr)		/* process one line of input */
+static void f1(int i, int j, int k, int l)
 {
-	int 	cmd;
+	printf("in f1():\n");
+	printf("globval = %d, autoval = %d, regival = %d, volaval = %d, statval = %d\n", globval, i, j, k, l);
+	f2();
 	
-	tok_ptr = ptr;
-	while((cmd = get_token()) > 0)
-	{
-		switch(cmd)			/* one case for each command */
-		{
-			case(TOK_ADD):
-			{
-				cmd_add();
-				break;
-			}
-		}
-	}
 }
 
-
-void cmd_add(void)
+static void f2(void)
 {
-	int 	token;
-	
-	token = get_token();
-	if(token < 0)			/* an err has occurred */
-	{
-		longjmp(jmpbuffer, 1);
-	}
-	/* rest of processing for this command */
+	longjmp(jmpbuffer, 1);
 }
 
-int get_token(void)
-{
-	/* fetch next token from line pointed to by tok_ptr */
-}
+
 
 /*
-未完成
+root@jOKERII:/home/topeet/UNIX_test# gcc longjmp.c -o longjmp
+root@jOKERII:/home/topeet/UNIX_test# ./longjmp
+in f1():
+globval = 95, autoval = 96, regival = 97, volaval = 98, statval = 99
+after longjmp:
+globval = 95, autoval = 96, regival = 97, volaval = 98, statval = 99
+root@jOKERII:/home/topeet/UNIX_test# gcc longjmp.c -o longjmp -O
+root@jOKERII:/home/topeet/UNIX_test# ./longjmp
+in f1():
+globval = 95, autoval = 96, regival = 97, volaval = 98, statval = 99
+after longjmp:
+globval = 95, autoval = 2, regival = 3, volaval = 98, statval = 99
+
 */
 
 
